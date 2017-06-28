@@ -24,7 +24,7 @@ In the past years bandwidth has increased to a lesser extent than the amount of 
 A url points to one location where the file can be found and you have to retrieve the file from that very location even if the file is available on a computer nearby.
 
 ## How it works
-![ipfs](./ipfs.jpg "How it works")
+![ipfs](https://tgrep.nl/dvandermeer/research/blob/master/ipfs/ipfs-1.jpg "How it works")
 
 ### Terms
 - [DAG](https://en.wikipedia.org/wiki/Directed_acyclic_graph)
