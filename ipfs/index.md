@@ -31,9 +31,11 @@ A url points to one location where the file can be found and you have to retriev
 
 # How it works
 
-![ipfs](./img/ipfs-stack.jpg "IPFS stack")
+![IPFS stack](./img/ipfs-stack.jpg "IPFS stack")
 
-## In short (copied from the [website](https://ipfs.io/))
+## In short
+
+Copied from the [website](https://ipfs.io/):
 
 - Each file and all of the blocks within it are given a unique fingerprint called a cryptographic hash.
 
@@ -55,15 +57,15 @@ Hash linking provides a authenticated way of checking that the thing you are loo
 
 Hash links are not static; just like in git the branch `master` doesn't point to a static folder, it points to the latest commit so it can change as changes are applied to the content.
 
-![ipns](./img/ipns.jpg "DNS to IPNS to IFS mapping")
+![IPFS addresses](./img/ipns.jpg "DNS to IPNS to IFS mapping")
 
 ## Store pages and web-apps locally
 
-As soon as a user visit an ipfs page or app, its get downloaded to the local ipfs repository, much like git. From this repository it can be served to peers directly, like bittorrent.
+As soon as a user visit an IPFS page or app, its get downloaded to the local IPFS repository, much like git. From this repository it can be served to peers directly, like bittorrent.
 
-Once a page or web-app has been downloaded it can be viewed or used offline in a browser. You can also mount ipfs to your local filesystem (fuse) and access the app or page directly from disk.
+Once a page or web-app has been downloaded it can be viewed or used offline in a browser. You can also mount IPFS to your local filesystem (fuse) and access the app or page directly from disk.
 
-As you can see in the image above, ipfs content addresses don't use a colon which made it possible to mount ipfs to the local file system.
+As you can see in the image above, IPFS content addresses don't use a colon which made it possible to mount IPFS to the local file system.
 
 # Links
 - [SFS](https://en.wikipedia.org/wiki/Self-certifying_File_System)
@@ -71,4 +73,4 @@ As you can see in the image above, ipfs content addresses don't use a colon whic
 - [DAG](https://en.wikipedia.org/wiki/Directed_acyclic_graph)
 - [DHT](https://en.wikipedia.org/wiki/Distributed_hash_table)
 - [libp2p](https://libp2p.io/)
-- [beaker browser](https://beakerbrowser.com/) Browser that support the ipfs protocal natively (without an add-on).
+- [beaker browser](https://beakerbrowser.com/) Browser that support the IPFS protocal natively (without an add-on).
