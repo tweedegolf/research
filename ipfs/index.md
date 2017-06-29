@@ -51,6 +51,7 @@ As soon as a user visit an ipfs page or app, its get downloaded to the local ipf
 
 Once a page or web-app has been downloaded it can be viewed or used offline in a browser. You can also mount ipfs to your local filesystem (fuse) and access the app or page directly from disk.
 
+As you can see in the image above, ipfs content addresses don't use a colon which made it possible to mount ipfs to the local file system.
 
 # Links
 - [SFS](https://en.wikipedia.org/wiki/Self-certifying_File_System)
@@ -58,4 +59,4 @@ Once a page or web-app has been downloaded it can be viewed or used offline in a
 - [DAG](https://en.wikipedia.org/wiki/Directed_acyclic_graph)
 - [DHT](https://en.wikipedia.org/wiki/Distributed_hash_table)
 - [libp2p](https://libp2p.io/)
-- [beaker browser](https://beakerbrowser.com/)
+- [beaker browser](https://beakerbrowser.com/) Browser that support the ipfs protocal natively (without an add-on).
