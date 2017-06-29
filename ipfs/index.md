@@ -33,6 +33,18 @@ A url points to one location where the file can be found and you have to retriev
 
 ![ipfs](./img/ipfs-stack.jpg "IPFS stack")
 
+## In short (copied from the [website](https://ipfs.io/))
+
+- Each file and all of the blocks within it are given a unique fingerprint called a cryptographic hash.
+
+- IPFS removes duplications across the network and tracks version history for every file.
+
+- Each network node stores only content it is interested in, and some indexing information that helps figure out who is storing what.
+
+- When looking up files, you're asking the network to find nodes storing the content behind a unique hash.
+
+- Every file can be found by human-readable names using a decentralized naming system called IPNS.
+
 ## Permanent addresses
 
 IPFS uses permanent addresses by using DHT, so instead of a dns name it uses a hash that is derived from the content that it points to, much like git.
