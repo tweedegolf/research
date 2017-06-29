@@ -68,6 +68,7 @@ Once a page or web-app has been downloaded it can be viewed or used offline in a
 As you can see in the image above, IPFS content addresses don't use a colon which made it possible to mount IPFS to the local file system.
 
 # Links
+- [IPFS](https://ipfs.io/)
 - [SFS](https://en.wikipedia.org/wiki/Self-certifying_File_System)
 - [Merkle tree](https://en.wikipedia.org/wiki/Merkle_tree)
 - [DAG](https://en.wikipedia.org/wiki/Directed_acyclic_graph)
