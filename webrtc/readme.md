@@ -56,3 +56,16 @@ The ability to create custom tracking for each session to gain business intellig
 Examples:
 
 - CodeMentor
+
+
+
+UDP => self-contained datagrams that can travel from source to destination themselves, without relying on earlier exchanges, stateless, no handshaking
+
+UDP is een zogenaamd null-protocol:
+
+- no guarantee of message delivery
+- no guarantee of order of delivery
+- no connection state tracking (stateless)
+- no congestion control
+
+UDP is very convinient for delivered via an unreliable service—no delivery guarantees, no failure notifications
