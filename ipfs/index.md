@@ -53,7 +53,7 @@ IPFS uses permanent addresses by using DHT, so instead of a dns name it uses a h
 
 All pieces of content are linked together using hash on a granular object level. A piece of content is broken into smaller objects if its file-size exceeds 256K.
 
-Hash linking provides a authenticated way of checking that the thing you are looking at is still the same thing and that nobody has changed it.
+Hash linking provides an authenticated way of checking that the thing you are looking at is still the same thing and that nobody has changed it.
 
 Hash links are not static; just like in git the branch `master` doesn't point to a static folder, it points to the latest commit so it can change as changes are applied to the content.
 
@@ -61,7 +61,7 @@ Hash links are not static; just like in git the branch `master` doesn't point to
 
 ## Store pages and web-apps locally
 
-As soon as a user visit an IPFS page or app, its get downloaded to the local IPFS repository, much like git. From this repository it can be served to peers directly, like bittorrent.
+As soon as a user visit an IPFS page or app, it gets downloaded to the local IPFS repository, much like git. From this repository it can be served to peers directly, like bittorrent.
 
 Once a page or web-app has been downloaded it can be viewed or used offline in a browser. You can also mount IPFS to your local filesystem (fuse) and access the app or page directly from disk.
 
