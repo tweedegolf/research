@@ -9,7 +9,10 @@
 [IMS](https://en.wikipedia.org/wiki/IP_Multimedia_Subsystem)
 [VoLTE](https://en.wikipedia.org/wiki/Voice_over_LTE)
 [Flash p2p](http://www.adobe.com/devnet/adobe-media-server/articles/p2p_apps_cirrus_lccs.html)
-
+[onsip](https://www.onsip.com/)
+[article](http://knowledge.santanu.net/what-is-webrtc-current-scenario-and-why-we-should-follow/)
+[lijst met WebRTC implementaties](https://www.leggetter.co.uk/real-time-web-technologies-guide/)
+[Google Codelab WebRTC](https://codelabs.developers.google.com/codelabs/webrtc-web/#0)
 
 Codecs zijn royalty free
 Met Flash had je een server licentie nodig (en voor een beter codec)

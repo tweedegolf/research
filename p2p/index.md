@@ -19,10 +19,11 @@ RTC was al sinds 2008 / 2009 mogelijk met Flash maar nu is het dus ingebouwd in 
 ### Toepassingen
 
 1. video conferencing ([appear.in](https://appear.in))
-2. monitoren van IP bewakingscamera's
-3. monitoren van machines d.m.v. meerdere speciale sensoren, b.v. infrarood camera, temperatuur, richtmicrofoons op bepaalde onderdelen van de machine
-4. teleleren ([codementor.io](https://www.codementor.io/))
-5. teleconsult; loodgieter kijkt mee met klant om te bepalen welke materialen ze moet kopen voordat ze ter plaatse gaat
+2. versturen game status p2p games
+3. monitoren van IP bewakingscamera's of bewakings drone
+4. monitoren van machines d.m.v. meerdere speciale sensoren, b.v. infrarood camera, temperatuur, richtmicrofoons op bepaalde onderdelen van de machine
+5. teleleren ([codementor.io](https://www.codementor.io/))
+6. teleconsult; loodgieter kijkt mee met klant om te bepalen welke materialen ze moet kopen voordat ze ter plaatse gaat
 
 
 Al deze toepassingen zitten in het vaarwater van de tradionele telecommunicatie vandaar dat naast de bekende tech bedrijven (Google, Mozilla, Opera, Microsoft en Apple) grote telecom / hardware bedrijven hebben meegewerkt aan het tot stand komen van de standaard en het implementeren van WebRTC in hun apparaten.
@@ -33,6 +34,18 @@ Al deze toepassingen zitten in het vaarwater van de tradionele telecommunicatie 
 Inmiddels zijn er al een grote hoeveelheid bedrijven die goed geld verdienen met het aanbieden van services die ofwel WebRTC gebruiken ofwel daar een service voor leveren.
 
 ### Hoe werkt het
+
+WebRTC is een verzamelijk van 3 API's:
+
+- MediaStream -> toegang tot streams van microfoon, webcam en AV files op de locale schijf
+- WebRTCPeerConnection -> voor audio en video streams
+- WebRTCDataChannel -> voor applicatie data die niet audio of video is, bijvoorbeeld de game status van een p2p spel
+
+#### MediaStream
+
+MediaStream werd voorheen getUserMedia genoemd. Met deze API kun je de stream van een microfoon of webcam lokaal opvangen en bijvoorbeeld koppelen aan een `<video>` of `<audio>` element. Je kunt de stream ook koppelen aan een WebRTCPeerConnection en zodoende een video conferencing app maken.
+
+![MediaStream](./img/mediastream.svg)
 
 #### UDP
 
@@ -101,15 +114,54 @@ Een belangrijk onderdeel van p2p is het signaling mechanisme. Bij een p2p verbin
 
 Je kunt bijvoorbeeld een WebRTC webclient verbinden aan een SIP (Session Initiation Protocal) service zodat je een PSTN (Public Switched Telephone Network) telefoon van een peer kunt laten overgaan.
 
+![signaling](./img/signaling1.svg)
+
 Je kunt ook vrij eenvoudig je eigen signaling service bouwen, bijvoorbeeld door gebruikers van een chat zich te laten registreren met een username en hun email adres. Als je een p2p verbinding wilt opbouwen kun de username als telefoonnummer gebruiken en het email adres als signaal (de server verstuurd een email: "gebruiker X wil met je chatten". Of als de gebruiker al online is kan de server een push bericht sturen.
 
 Een singaling service zorgt er ook voor dat de stream in het juiste formaat wordt verstuurd. Een peer die een verbinding wil maken met andere peer communiceert daarom welke codecs, formaten en afmetingen (video) er ondersteund worden. De ander peer slaat deze informatie op en verstuurd communiceert zijn eigen constraints.
 
-Het converteren van de streams naar de juiste formaten, afmetingen en codecs is onderdeel van WebRTC en in de browser geimplementeerd: daar heb je dus geen omkijken naar.
+![signaling](./img/signaling2.svg)
+
+De hele verbinding in 1 plaatje:
+
+![verbinding](./img/p2p-connection-options.png)
 
 #### Nog meer complexe zaken onder de motorkap
 
+Het converteren van de streams naar de juiste formaten, afmetingen en codecs die door de peers worden ondersteund is onderdeel van WebRTC en in de browser geimplementeerd: daar heb je dus geen omkijken naar. Andere zaken die in de browser zijn geimplementeerd zijn tools om de streams te optimaliseren voor alle omstandigheden:
+
+![under the hood](./img/WebRTC-under-the-hood.svg)
+
+Verder wordt alle encryptie en decryptie van de beveiligde verbinding door de browser afgehandeld.
+
+![protocollen](./img/WebRTC-protocol-stack.svg)
+
+- **ICE**: Interactive Connectivity Establishment (RFC 5245)
+    - **STUN**: Session Traversal Utilities for NAT (RFC 5389)
+    - **TURN**: Traversal Using Relays around NAT (RFC 5766)
+- **SDP**: Session Description Protocol (RFC 4566)
+- **DTLS**: Datagram Transport Layer Security (RFC 6347)
+- **SCTP**: Stream Control Transport Protocol (RFC 4960)
+- **SRTP**: Secure Real-Time Transport Protocol (RFC 37
+
+
+#### Sonstiges
+
+Chrome een tooltje ingebouwd om WebRTC verbinding en stream te kunnen analyseren:
+
+`chrome://webrtc-internals`
+
+Verder is Wireshark een goede tool om de verstuurde pakketjes te bekijken.
 
 ### Conclusie
 
-WebRTC is een complexe technologie die ondanks het feit dat het p2p is niet zonder externe server kan.
+WebRTC is een complexe technologie die ondanks het feit dat het p2p is niet zonder externe server kan. Op dit moment wordt WebRTC voornamelijk gebruikt voor video conferencing en screensharing al dan niet met video, maar in combinatie met IoT zijn er nog enorm veel andere mogelijkheden.
+
+Er zijn veel voorbeeldjes te vinden van implementaties van WebRTC te vinden op github. Veel van dit soort voorbeeldjes zijn gemaakt rond 2013 en daarmee outdated, ze gebruiken een verouderde versie van WebRTC of werken om een andere reden niet meer in de huidige browsers.
+
+Hier vind je een lijst met redelijk up-to-date WebRTC implementaties: [link](https://www.leggetter.co.uk/real-time-web-technologies-guide/)
+
+
+## IPFS
+
+IPFS staat voor Interplanetary File System en daarmee wordt gelijk de ambitie van het project duidelijk: het moet een file system zijn dat om kan gaan met slechte verbindingen en grote latency.
