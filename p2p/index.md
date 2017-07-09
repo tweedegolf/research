@@ -220,83 +220,50 @@ IPFS staat voor Interplanetary File System en daarmee wordt gelijk de ambitie va
 
 Het wordt ook wel het permanente web of het offline web genoemd. Dit houdt in de breedste zin in dat pagina's en webapps zonder netwerk verbinding toch blijven werken, en in engere zin dat het werkt als een centrale server eruit ligt.
 
-### Redenen voor een permanent web
+### Nadelen HTTP
 
-- We use a lot of tools that are unavailable offline (google docs, facebook, twitter, web-mail).
-- In the outskirts of the internet bandwidth might be poor (rural or less developed areas).
-- Weak wifi in public transport or airplanes.
-- Sometimes you cannot move files from a mobile to a laptop without internet.
-- Circumvent latency
-- A centralized web can be shut off easily by malicious companies and governments (Egypt took the internet down on Jan 28th 2013).
-- A centralized web is vulnerable (natural disasters, fire in data-center, power outages).
-- Centralized web results in massive amount of unnecessary bandwidth usage (if we are all in the same room working on a Google Doc, we all have to download the document from the backbone).
-- Permanence; avoids digital equivalent of book-burnings
-- Webpages disappear because the author stops the hosting (dead links)
-- Open web: everyone can publish and host (no hosting party needed)
-- Digital vellum: information that is stored on legacy computers / operating systems / storage
+1. HTTP is gecentraliseerd en daardoor wordt het kwetsbaar:
+
+- kwaadaardige overheden en bedrijven hoeven maar 1 server af te luisteren en kunnen dan al heel veel data afluisteren
+- kwaadaardige overheden en bedrijven hoeven maar 1 server plat te gooien om toegang tot een groot deel van het web te blokkeren
+- een domeinnaam registratie of hosting kan worden beeindigd waardoor een gedeelte van het web onbereikbaar wordt (of verdwijnt)
+- er kan ergens een datacenter of kabel stuk gaat.
+- DDOS attacks
+
+2. HTTP is inefficient: een populaire youtube video wordt steeds van een Google server gehaald terwijl hij waarschijnlijk al een keer gedownload is door een computer meer in de buurt.
+
+3. HTTP maakt ons te veel afhankelijk van de backbone, bijvoorbeeld als Google Docs plat ligt kun je niet meer bij je bestanden. Dit geldt ook voor de meeste andere cloud apps.
 
 
-### Bandwidth
+### Oplossingen IPFS
 
-In the past years bandwidth has increased to a lesser extent than the amount of storage you can get for the same money. This means that we can store bigger files on the web but we can not download them faster. In fact internet becomes slower if file-sizes increase at a faster pace than bandwidth.
+#### Content in plaats van adres
 
-### Location addressing
+HTTP zoekt naar een adres, IPFS zoekt naar content. De naam van de content is een cryptografische hash die gebaseerd is op de content (zoals bij git). Zo weet je zeker dat de naam altijd naar hetzelfde en ongewijzigde bestand verwijst.
 
-A url points to one location where the file can be found and you have to retrieve the file from that very location even if the file is available on a computer nearby.
+De hashes worden opgeslagen in DHT (Distributed Hash Table). DHT haalt het bestand op bij de verschillende seeds en checkt of het de juiste content is. Grote files worden opgesplitst in kleine brokjes (objects) van 255K zodat een file van meerdere seeds opgehaald kan worden en dus per saldo sneller kan inladen.
 
-### Goals:
+#### Directories
 
-1. Secure communications for humanity (Internet + Tor)
-2. Secure computation for humanity (Web + IPFS) -> emulate legacy computer systems
-3. Secure flourishing of knowledge (Wikipedia, Archives, Science, IPFS, Open Access)
+Een hash kan verwijzen naar een directory; de namen van de bestanden in die directory hoeven niet aangepast te worden, dit is dus een hele makkelijke manier om een bestaande folder van een webserver naar IPFS te verplaatsen.
 
-### How it works
+#### Hash - human readable naam mapping
 
-![IPFS stack](./img/ipfs-stack.jpg "IPFS stack")
+Hashes zijn lang en lastig te onthouden; met IPFS kun je de bestaande DNS infrastructuur gebruiken om makkelijkere namen te koppelen aan hashes. IPFS gaat in de toekomst waarschijnlijk ook [Namecoin](https://namecoin.org/) ondersteunen. Namecoin is een open source technologie die het mogelijk maakt om bepaalde componenten van het web te kunnen decentraliseren, waaronder DNS.
 
-#### In short
+#### Hash - human readable naam mutable
 
-Copied from the [website](https://ipfs.io/):
-
-- Each file and all of the blocks within it are given a unique fingerprint called a cryptographic hash.
-
-- IPFS removes duplications across the network and tracks version history for every file.
-
-- Each network node stores only content it is interested in, and some indexing information that helps figure out who is storing what.
-
-- When looking up files, you're asking the network to find nodes storing the content behind a unique hash.
-
-- Every file can be found by human-readable names using a decentralized naming system called IPNS.
-
-#### Permanent addresses
-
-IPFS uses permanent addresses by using DHT, so instead of a dns name it uses a hash that is derived from the content that it points to, much like git.
-
-All pieces of content are linked together using hash on a granular object level. A piece of content is broken into smaller objects if its file-size exceeds 256K.
-
-Hash linking provides an authenticated way of checking that the thing you are looking at is still the same thing and that nobody has changed it.
-
-Hash links are not static; just like in git the branch `master` doesn't point to a static folder, it points to the latest commit so it can change as changes are applied to the content.
-
-![IPFS addresses](./img/ipns.jpg "DNS to IPNS to IFS mapping")
-
+Omdat de naam van een bestand gebaseerd is op de inhoud van dat bestand verandert de naam van het bestand als je iets aan de inhoud wijzigt. Met IPNS kun je hash aanmaken die altijd naar de laaste versie van een bestand wijst, net zoals een branchname op git altijd naar de laatste versie verwijst.
 
 ### Ontwikkeling
 
-Op dit moment is er een implementatie van ipfs in go en een gedeeltelijke implementatie in javascript.
+Op dit moment is er een implementatie van IPFS in go en een gedeeltelijke implementatie in javascript; als je deze installeert wordt je computer een IPFS node waarmee je bestanden en websites kunt publiceren op IPFS.
 
-De implementatie in go installeer je op je locale machine en dit is feitelijk een applicatie die gitrepository opzet voor gedownloade webcontent en functionaliteit heeft om ipns adressen te mappen naar ipfs content. Verder kan de app vergelijkbaar met bittorrent als seed voor peers opereren.
+De implementatie in go is feitelijk een applicatie die gitrepository opzet voor gedownloade webcontent en functionaliteit heeft om IPNS adressen te mappen naar IPFS content. Verder kan de applicatie vergelijkbaar met bittorrent de bestanden die je hebt opgeslagen in je lokale repository seeden naar peers.
 
-Op dit moment zijn er voor Chrome en Firefox plugins die globale ipns adressen in de browsers resolven en de gevonden content downloaden naar je locale ipns installatie downloaden en vanaf daar kun je dan de content via een locale url bekijken.
+Op dit moment zijn er voor Chrome en Firefox plugins die globale IPNS adressen in de browser's adres balk resolven en de bijbehorende content downloaden naar je locale IPFS installatie; vanaf daar kun je dan de content via een locale url bekijken (http://127.0.0.1/ipfs/...).
 
-M.a.w.: je download eerst de content en bekijkt het dan vanaf je lokale kopie.
+M.a.w.: je download eerst de content en bekijkt deze dan vanaf je lokale kopie.
 
-#### Store pages and web-apps locally
-
-As soon as a user visit an IPFS page or app, it gets downloaded to the local IPFS repository, much like git. From this repository it can be served to peers directly, like bittorrent.
-
-Once a page or web-app has been downloaded it can be viewed or used offline in a browser. You can also mount IPFS to your local filesystem (fuse) and access the app or page directly from disk.
-
-As you can see in the image above, IPFS content addresses don't use a colon which made it possible to mount IPFS to the local file system.
-
+Zie verder dit document [link](https://tgrep.nl/dvandermeer/research/blob/master/ipfs/index.md).
 
