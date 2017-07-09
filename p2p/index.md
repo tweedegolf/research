@@ -1,13 +1,13 @@
 # P2P
 
-**NB: de markdown implementatie van gitlab ondersteunt geen svg als plaatjes! Als je hieronder placeholders ziet kun je de svg alsnog zien door er op te klikken; het plaatje opent dan in een nieuwe tab**
+**NB: de markdown implementatie van gitlab ondersteunt geen svg als plaatjes! Klik op de placeholder en de svg opent in een nieuwe tab.**
 
 Dit praatje gaat over p2p en ik behandel 2 p2p technologieën:
 
 - ipfs
 - webrtc
 
-Behalve dat het allebei implementaties zijn van p2p hebben ze verder niets met elkaar te maken. Beide onderwerpen zijn enorm complex en uitgebreid en omvatten een boom aan protocollen en onderliggende technologieën. Dit praatje blijft helaas enigszins aan de oppervlakt maar voor meer diepgang kun je de links volgen.
+Behalve dat het allebei implementaties zijn van p2p hebben ze verder niets met elkaar te maken. Beide onderwerpen zijn enorm complex en uitgebreid en omvatten een boom aan protocollen en onderliggende technologieën. Dit praatje blijft helaas enigszins aan de oppervlakte maar voor meer diepgang kun je de links volgen.
 
 ## WebRTC
 
@@ -24,15 +24,15 @@ Toepassingen vallen vrijwel allemaal in 1 van de 3 categorieën conferencing, sh
 
 1. Video conferencing (bijvoorbeeld: [appear.in](https://appear.in), [talky.io](https://talky.io/)).
 2. Versturen game status bij p2p games.
-3. Monitoren van IP bewakingscamera's of bewakings drone.
+3. Monitoren van IP bewakingscameras of bewakings drones.
 4. Monitoren van machines d.m.v. het koppelen van meerdere speciale sensoren, b.v. infrarood camera, temperatuur, richtmicrofoons op bepaalde onderdelen van de machine; zodra de sensoren een bepaalde threshold waarde bereiken kan dit een indicatie zijn dat er iets mis aan het gaan is met de machine en kan de operator gewaarschuwd worden.
-5. Teleleren (bijvoorbeeld: [codementor.io](https://www.codementor.io/))
-6. Teleconsult; loodgieter kijkt mee met klant om te bepalen welke materialen ze moet kopen voordat ze ter plaatse gaat
-7. AR en VR
-8. Telehealth, personal training, personal shopping
+5. Teleleren (bijvoorbeeld: [codementor.io](https://www.codementor.io/)).
+6. Teleconsult; loodgieter kijkt mee met klant om te bepalen welke materialen ze moet kopen voordat ze ter plaatse gaat.
+7. AR en VR.
+8. Telehealth, personal training, personal shopping.
 
 
-Al deze toepassingen zitten in het vaarwater van de tradionele telecommunicatie vandaar dat naast de bekende tech bedrijven (Google, Mozilla, Opera, Microsoft en Apple) ook grote telecom en hardware bedrijven hebben meegewerkt aan het tot stand komen van de standaard en het implementeren van WebRTC in hun apparaten:
+Al deze toepassingen zitten in het vaarwater van de tradionele telecommunicatie vandaar dat naast de bekende tech bedrijven Google, Mozilla, Opera, Microsoft en Apple ook grote telecom en hardware bedrijven hebben meegewerkt aan het tot stand komen van de standaard en het implementeren van WebRTC in hun apparaten:
 
 - Ericson
 - Cisco
@@ -49,7 +49,7 @@ WebRTC is feitelijk een verzameling van 3 API's:
 
 #### MediaStream
 
-MediaStream werd voorheen getUserMedia genoemd. Met deze API kun je de stream van een extern apparaat zoals een microfoon of webcam lokaal opvangen en bijvoorbeeld koppelen aan een `<video>` of `<audio>` element. Je kunt de stream ook koppelen aan een WebRTCPeerConnection en zodoende een video conferencing app maken.
+MediaStream werd voorheen getUserMedia genoemd. Met deze API kun je de stream van een extern apparaat zoals een microfoon of webcam lokaal opvangen en bijvoorbeeld koppelen aan een `<video>` of `<audio>` element. Je kunt deze stream ook koppelen aan een WebRTCPeerConnection en zodoende een video conferencing app maken.
 
 ![MediaStream](./img/mediastream.svg)
 
@@ -57,7 +57,7 @@ MediaStream werd voorheen getUserMedia genoemd. Met deze API kun je de stream va
 
 TCP is tot nu toe veruit het meest gebruikte protocol in browsers. TCP levert een betrouwbare stroom van pakketjes in de juiste volgorde en als een pakketje kwijtraakt worden alle pakketjes die na dat pakketje binnen zijn gekomen gebufferd en wacht de stream tot het kwijtgeraakte pakketje opnieuw verstuurd is.
 
-Precies om deze redenen gebruikt WebRTC UDP voor het verzenden van de data, dus UDP over IP, UDP/IP. UDP is een protocol met weinig overhead. UDP pakketjes zijn self-contained ze kunnen zelf hun weg vinden van zender naar ontvanger, zonder afhankelijk te zijn van eerder verzonden pakketjes.
+Precies om deze redenen gebruikt WebRTC UDP voor het verzenden van de data, dus UDP over IP (UDP/IP). UDP is een protocol met weinig overhead. UDP pakketjes zijn self-contained ze kunnen zelf hun weg vinden van zender naar ontvanger, zonder afhankelijk te zijn van eerder of later verzonden pakketjes.
 
 Wat van belang is is dat UDP een zogenaamd null-protocol is:
 
@@ -71,7 +71,7 @@ Dit lijkt onhandig maar dit is juist erg geschikt voor streaming data over een l
 
 #### NAT
 
-Het probleem van UDP is dat de meeste computers achter een NAT apparaat zitten (bv. een router). NAT staat voor Network Address Translation; het  vervangt per IP pakketje het IP-adres van de ontvanger of van de afzender. NAT is bedacht om het opraken van IP4 adressen uit te stellen; er zijn bepaalde ranges IP-adressen gereserveerd voor interne netwerken en deze lokale ranges kunnen hergebruikt worden. Het gaat op de volgende ranges:
+Het probleem van UDP is dat de meeste computers achter een NAT apparaat zitten (bv. een router). NAT staat voor Network Address Translation; het  vervangt per IP pakketje het IP-adres van de ontvanger of van de afzender. NAT is bedacht om het opraken van IP4 adressen uit te stellen; er zijn bepaalde ranges IP-adressen gereserveerd voor interne netwerken en deze lokale ranges kunnen hergebruikt worden omdat ze achter een uniek extern IP adres zitten. Het gaat op de volgende ranges:
 
 - 10.0.0.0 - 10.255.255.255 => 16777216 lokale adressen
 - 172.16.0.0 - 172.31.255.255=> 1048576 lokale adressen
@@ -79,7 +79,12 @@ Het probleem van UDP is dat de meeste computers achter een NAT apparaat zitten (
 
 Het uitsturen van een UDP datagram is geen probleem omdat alleen het adres en de poort van de afzender vertaalt hoeft te worden van intern naar extern: in ieder IP datagram (package) wordt het interne ip adres van de zender omgezet naar het externe publieke adres (bv 192.168.0.10 => 92.111.112.10) en van ieder UDP datagram wordt de interne poort omgezet naar de externe poort (bv 1337 => 15436).
 
-Het probleem is het ontvangen van UDP pakketjes. Een TCP verbinding begint met een handshake en de verbinding wordt pas weer afgesloten na close message (of een timeout). De router kan de routing van extern adres:poort naar een intern adres:poort dus tijdelijk opslaan en kan er zo vanuitgaan dat ieder pakketje dat binnenkomt op een bepaalde adres:poort combinatie bij de juiste computer in het lokale netwerk aankomt.
+**IP header**
+![IP header](./img/IP-header.svg "IP Header")
+**UDP header**
+![UDP header](./img/UDP-header.svg "UDP Header")
+
+Het probleem is het ontvangen van UDP pakketjes. Een TCP verbinding begint met een handshake en de verbinding wordt pas weer afgesloten na close message (of een timeout). De router kan de routing van extern adres:poort naar een intern adres:poort dus tijdelijk opslaan en kan er zo voor zorgen dat ieder pakketje dat binnenkomt op een bepaalde adres:poort combinatie bij de juiste computer in het lokale netwerk aankomt.
 
 UDP is echter stateless en daarom moeten er andere technieken gebruikt worden om UDP pakketjes naar het juiste adres en de juiste poort te kunnen routen: STUN en TURN, gecombineerd gebruikt in ICE trickle.
 
@@ -95,7 +100,7 @@ De functionaliteit van STUN is vrij eenvoudig en je zou zelf een STUN server kun
 
 #### TURN
 
-Helaas is STUN niet voor alle complexe NAT configuraties geschikt; in ongeveer 8% van de gevallen (volgens de verzamelde data van Google's STUN servers) lukt het niet om met STUN een p2p verbinding op te bouwen. Daarvoor is TURN in het leven geroepen: Traversal Using Relays around NAT. Ook TURN doet precies wat de naam aangeeft: de UDP pakketjes worden via een externe server verstuurd. Feitelijk is het daarmee dus geen p2p meer!
+Helaas is STUN niet voor alle NAT configuraties geschikt; in ongeveer 8% van de gevallen (volgens de verzamelde data van Google's STUN servers) lukt het niet om met STUN een p2p verbinding op te bouwen. Daarvoor is TURN in het leven geroepen: Traversal Using Relays around NAT. Ook TURN doet precies wat de naam aangeeft: de UDP pakketjes worden via een externe server verstuurd (ge-relayed). Feitelijk is het daarmee dus geen p2p meer!
 
 Omdat de UDP stream via de TURN server loopt verbruikt een TURN server veel bandbreedte en worden er ook zwaardere eisen gesteld aan de hardware. Om een TURN server te kunnen gebruiken moet je dan ook meestal een betaald account nemen. WebRTC begint daarmee steeds meer te lijken op RTC via de Flash plugin zoals ik eerder beschreef.
 
@@ -138,15 +143,15 @@ De ICE agent zorgt er ook voor dat er een keep alive signaal wordt verstuurd. De
 
 #### Signaling
 
-Een belangrijk onderdeel van p2p is het signaling mechanisme. Bij een p2p verbinding via de telefoon is het signaling mechanisme je ringtoon. In WebRTC is geen singaling ingebouwd en dat is een bewuste keuze omdat je op deze manier van bestaande signaling services gebruik kunt maken.
+Een belangrijk onderdeel van p2p is het signaling mechanisme. Bij een p2p verbinding via de telefoon is het signaling mechanisme je ringtoon. In WebRTC is geen signaling ingebouwd en dat is een bewuste keuze omdat je op deze manier van bestaande signaling services gebruik kunt maken.
 
 Je kunt bijvoorbeeld een WebRTC webclient verbinden aan een SIP (Session Initiation Protocal) service zodat je een PSTN (Public Switched Telephone Network) telefoon van een peer kunt laten overgaan.
 
 ![signaling](./img/signaling1.svg)
 
-Je kunt ook vrij eenvoudig je eigen signaling service bouwen, bijvoorbeeld door gebruikers van een chat zich te laten registreren met een username en hun email adres. Als je een p2p verbinding wilt opbouwen kun de username als telefoonnummer gebruiken en het email adres als signaal (de server verstuurd een email: "gebruiker X wil met je chatten". Of als de gebruiker al online is kan de server een push bericht sturen.
+Je kunt ook vrij eenvoudig je eigen signaling service bouwen, bijvoorbeeld door gebruikers van een chat zich te laten registreren met een username en hun email adres. Als je een p2p verbinding wilt opbouwen kun de username als telefoonnummer gebruiken en het email adres als signaal (de server verstuurd een email: "gebruiker X wil met je chatten"). Of als de gebruiker al online is kan de server een push bericht sturen.
 
-Een singaling service zorgt er ook voor dat de stream in het juiste formaat wordt verstuurd. Een peer die een verbinding wil maken met andere peer communiceert daarom welke codecs, formaten en afmetingen (video) er ondersteund worden. De ander peer slaat deze informatie op en communiceert zijn eigen constraints.
+Een signaling service zorgt er ook voor dat de stream in het juiste formaat wordt verstuurd. Een peer die een verbinding wil maken met andere peer communiceert daarom welke codecs, formaten en afmetingen (video) er ondersteund worden. De ander peer slaat deze informatie op en communiceert zijn eigen constraints.
 
 ![signaling](./img/signaling2.svg)
 
@@ -172,11 +177,11 @@ Verder wordt alle encryptie en decryptie van de beveiligde verbinding door de br
 - **SCTP**: Stream Control Transport Protocol (RFC 4960)
 - **SRTP**: Secure Real-Time Transport Protocol (RFC 37
 
-DTLS is used to negotiate the secret keys for encrypting media data and for secure transport of application data.
+**DTLS** is used to negotiate the secret keys for encrypting media data and for secure transport of application data.
 
-SRTP is used to transport audio and video streams (WebRTCPeerConnection).
+**SRTP** is used to transport audio and video streams (WebRTCPeerConnection).
 
-SCTP is used to transport application data (WebRTCDataChannel).
+**SCTP** is used to transport application data (WebRTCDataChannel).
 
 #### Sonstiges
 
@@ -188,9 +193,9 @@ Verder is Wireshark een goede tool om de verstuurde pakketjes te bekijken.
 
 ### Conclusie
 
-WebRTC is een complexe technologie die ondanks het feit dat het p2p is niet zonder externe server kan. Op dit moment wordt WebRTC voornamelijk gebruikt voor video conferencing en screensharing al dan niet met video, maar in combinatie met IoT zijn er nog enorm veel onontgonnen mogelijkheden.
+WebRTC is een complexe technologie die ondanks het feit dat het p2p is niet zonder externe server(s) kan. Op dit moment wordt WebRTC voornamelijk gebruikt voor video conferencing en screensharing al dan niet met video, maar in combinatie met IoT zijn er nog enorm veel onontgonnen mogelijkheden.
 
-Je zou je kunnen afvragen of als WebRTC via een TURN server loopt je niet beter kunt kiezen voor websockets, maar dan moet je alle logica voor beveiliging en optimalisatie zelf toevoegen op de client.
+Je zou je kunnen afvragen of als WebRTC via een TURN server loopt je niet beter kunt kiezen voor websockets, maar dan moet je alle logica voor beveiliging en optimalisatie zelf toevoegen op de client. Daarnaast is een verbinding via WebRTC sneller dan via websockets.
 
 Er zijn veel voorbeeldjes van implementaties van WebRTC te vinden op github. Veel van dit soort voorbeeldjes zijn gemaakt rond 2013 en daarmee outdated, ze gebruiken een verouderde versie van WebRTC of werken om een andere reden niet meer in de huidige browsers.
 
