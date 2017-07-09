@@ -224,13 +224,13 @@ Het wordt ook wel het permanente web of het offline web genoemd. Dit houdt in de
 
 1. HTTP is gecentraliseerd en daardoor wordt het kwetsbaar:
 
-- kwaadaardige overheden en bedrijven hoeven maar 1 server af te luisteren en kunnen dan al heel veel data afluisteren
+- kwaadaardige overheden en bedrijven hoeven maar 1 server af te luisteren en kunnen dan al heel veel data vergaren
 - kwaadaardige overheden en bedrijven hoeven maar 1 server plat te gooien om toegang tot een groot deel van het web te blokkeren
 - een domeinnaam registratie of hosting kan worden beeindigd waardoor een gedeelte van het web onbereikbaar wordt (of verdwijnt)
-- er kan ergens een datacenter of kabel stuk gaat.
+- er kan ergens een datacenter of kabel stuk gaan
 - DDOS attacks
 
-2. HTTP is inefficient: een populaire youtube video wordt steeds van een Google server gehaald terwijl hij waarschijnlijk al een keer gedownload is door een computer meer in de buurt.
+2. HTTP is inefficient: een populaire youtube video wordt steeds van een Google server gehaald terwijl hij waarschijnlijk al een keer gedownload is door een computer in de buurt.
 
 3. HTTP maakt ons te veel afhankelijk van de backbone, bijvoorbeeld als Google Docs plat ligt kun je niet meer bij je bestanden. Dit geldt ook voor de meeste andere cloud apps.
 
@@ -253,17 +253,17 @@ Hashes zijn lang en lastig te onthouden; met IPFS kun je de bestaande DNS infras
 
 #### Hash - human readable naam mutable
 
-Omdat de naam van een bestand gebaseerd is op de inhoud van dat bestand verandert de naam van het bestand als je iets aan de inhoud wijzigt. Met IPNS kun je hash aanmaken die altijd naar de laaste versie van een bestand wijst, net zoals een branchname op git altijd naar de laatste versie verwijst.
+Omdat de naam van een bestand gebaseerd is op de inhoud van dat bestand verandert de naam van het bestand als je iets aan de inhoud wijzigt. Dat kan onwenselijk zijn; met IPNS kun je hash aanmaken die altijd naar de laaste versie van een bestand wijst, net zoals een branchname op git altijd naar de laatste versie verwijst.
 
 ### Ontwikkeling
 
-Op dit moment is er een implementatie van IPFS in go en een gedeeltelijke implementatie in javascript; als je deze installeert wordt je computer een IPFS node waarmee je bestanden en websites kunt publiceren op IPFS.
+Op dit moment is er een implementatie van IPFS in go en een gedeeltelijke implementatie in javascript; als je deze installeert wordt je computer een IPFS node waarmee je bestanden en websites kunt publiceren via IPFS.
 
-De implementatie in go is feitelijk een applicatie die gitrepository opzet voor gedownloade webcontent en functionaliteit heeft om IPNS adressen te mappen naar IPFS content. Verder kan de applicatie vergelijkbaar met bittorrent de bestanden die je hebt opgeslagen in je lokale repository seeden naar peers.
+De implementatie in go is feitelijk een applicatie die git repository opzet voor gedownloade webcontent en functionaliteit heeft om IPNS adressen te mappen naar IPFS content. Verder kan de applicatie vergelijkbaar met bittorrent de bestanden die je hebt opgeslagen in je lokale repository seeden naar peers.
 
-Op dit moment zijn er voor Chrome en Firefox plugins die globale IPNS adressen in de browser's adres balk resolven en de bijbehorende content downloaden naar je locale IPFS installatie; vanaf daar kun je dan de content via een locale url bekijken (http://127.0.0.1/ipfs/...).
+Op dit moment zijn er voor Chrome en Firefox plugins die globale IPNS adressen in de browser's adres balk resolven en de bijbehorende content downloaden naar je locale IPFS repository; vanaf daar kun je dan de content via een locale url bekijken (http://127.0.0.1/ipfs/...).
 
-M.a.w.: je download eerst de content en bekijkt deze dan vanaf je lokale kopie.
+M.a.w.: je downloadt eerst de content en bekijkt deze dan vanaf je lokale kopie.
 
 Zie verder dit document [link](https://tgrep.nl/dvandermeer/research/blob/master/ipfs/index.md).
 
