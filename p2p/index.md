@@ -205,7 +205,9 @@ Hier vind je een lijst met redelijk up-to-date WebRTC implementaties: [link](htt
 
 - O'reilly article about WebRTC [link](https://hpbn.co/webrtc/)
 - O'reilly article about UDP [link](https://hpbn.co/building-blocks-of-udp/)
-- Article [link](http://knowledge.santanu.net/what-is-webrtc-current-scenario-and-why-we-should-follow/)
+- HTML5 rocks article WebRTC [link](https://www.html5rocks.com/en/tutorials/webrtc/infrastructure/)
+- HTML5 rocks gettings started WebRTC [link](https://www.html5rocks.com/en/tutorials/webrtc/basics/)
+- Article on Santanu [link](http://knowledge.santanu.net/what-is-webrtc-current-scenario-and-why-we-should-follow/)
 - IoT and WebRTC [link](http://iot.ieee.org/newsletter/march-2016/iot-realtime-communications.html)
 - A total replacement of traditional phone lines: sip.js [link](https://sipjs.com/)
 - Business communication with WebRTC: onsip [link](https://www.onsip.com/)
