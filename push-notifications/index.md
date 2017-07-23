@@ -72,4 +72,3 @@ Starting in iOS 8, you can optionally create actionable notifications by registe
 - [Parse server](https://github.com/parse-community/parse-server)
 - [Setup parse server on heroku](https://devcenter.heroku.com/articles/deploying-a-parse-server-to-heroku)
 - [Provider deployed on heroku](http://provider-tg.herokuapp.com/)
-
